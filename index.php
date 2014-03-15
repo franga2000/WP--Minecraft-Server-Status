@@ -14,14 +14,12 @@ class MCServerStatus extends WP_Widget {
 		parent::__construct(false, $name = __('Minecraft Server Status'));
 	}
 	function form() {
-		//the form is submitted, save into database
 		if (isset($_POST['submitted'])) {
 			update_option('MCServerStatus_widget_title', $_POST['widgettitle']);
 			update_option('MCServerStatus_widget_server', $_POST['server']);
 			update_option('MCServerStatus_widget_pl', $_POST['pl']);
 		}
 		
-		//load options
 		$widgettitle = get_option('MCServerStatus_widget_title');
 		$server = get_option('MCServerStatus_widget_server');
 		$pl = get_option('MCServerStatus_widget_pl');
@@ -53,7 +51,7 @@ class MCServerStatus extends WP_Widget {
 		$server = get_option('MCServerStatus_widget_server');
 		$currPlayers = 0;
 		$maxPlayers = 0;
-		$players = Array("franga2000", "_xXxInSaNexXx_");
+		$players = Array();
     require __DIR__ . '/MinecraftQuery.class.php';
 
     $Query = new MinecraftQuery( );
@@ -70,6 +68,7 @@ class MCServerStatus extends WP_Widget {
 		<div class="widget MCServerStatus">
 			<h3 class="widget-title widget_primary_title"><?php echo $widgettitle; ?><b class="caret"></b></h3>
 			<b>IP:</b> <?php echo $server; ?><br>
+			<img src="wp-content/plugins/MCServerStatus/img/<?php switch($online){ case true: echo 'online'; break; case false: echo 'offline'; break; {}}?>-icon.png"> <?php switch($online){ case true: echo '<p style="color:green; display:inline;">ONLINE</p>'; break; case false:  echo '<p style="color:red; display:inline;">OFFLINE</p>'; break; {}}?><br>
 			<a href="#" id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link"><b>Players: </b><?php echo $currPlayers . "/" . $maxPlayers ?></a><span id="spoiler_id" style="display: none;"><a href="#"onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link"><b>Players: </b><?php echo $currPlayers . "/" . $maxPlayers ?></a>
 			<?
 			foreach($players as $player){
