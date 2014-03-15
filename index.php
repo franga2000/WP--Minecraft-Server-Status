@@ -54,6 +54,18 @@ class MCServerStatus extends WP_Widget {
 		$currPlayers = 0;
 		$maxPlayers = 0;
 		$players = Array("franga2000", "_xXxInSaNexXx_");
+    require __DIR__ . '/MinecraftQuery.class.php';
+
+    $Query = new MinecraftQuery( );
+    try{
+        $Query->Connect( $server, 25565 );
+        $info = $Query->GetInfo();
+        $players = $Query->GetPlayers();
+        $maxPlayers = $info['MaxPlayers'];
+        $currPlayers = $info['Players'];
+    	$online = true;
+    }catch( MinecraftQueryException $e ){
+        $online = false;}
 	?>
 		<div class="widget MCServerStatus">
 			<h3 class="widget-title widget_primary_title"><?php echo $widgettitle; ?><b class="caret"></b></h3>
@@ -75,7 +87,17 @@ class MCServerStatus extends WP_Widget {
 		</div>
 		<?php
 	}
-	
+
+function display_transient_update_plugins ($transient)
+{
+    $obj = new stdClass();
+    $obj->slug = 'access.php';
+    $obj->new_version = '2.0';
+    $obj->url = 'http://anyurl.com';
+    $obj->package = 'http://anyurl.com';
+    $transient[plugin_directory/plugin_file.php] -> $obj;
+    return $transient;
+}	
 }
 
 add_action( 'widgets_init', 'register_MCServerStatus');
@@ -84,4 +106,5 @@ function register_MCServerStatus()
 	{
 	 register_widget( 'MCServerStatus' );
 	}
+	add_filter ('pre_set_site_transient_update_plugins', 'display_transient_update_plugins');
 ?>
