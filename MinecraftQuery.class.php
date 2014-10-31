@@ -9,7 +9,7 @@ class MinecraftQuery
 	/*
 	 * Class written by xPaw
 	 *
-	 * Website: http://xpaw.ru
+	 * Website: http://xpaw.me
 	 * GitHub: https://github.com/xPaw/PHP-Minecraft-Query
 	 */
 	
@@ -110,7 +110,8 @@ class MinecraftQuery
 			'numplayers' => 'Players',
 			'maxplayers' => 'MaxPlayers',
 			'hostport'   => 'HostPort',
-			'hostip'     => 'HostIp'
+			'hostip'     => 'HostIp',
+			'game_id'    => 'GameName'
 		);
 		
 		foreach( $Data as $Key => $Value )
@@ -173,7 +174,7 @@ class MinecraftQuery
 			throw new MinecraftQueryException( "Failed to write on socket." );
 		}
 		
-		$Data = FRead( $this->Socket, 2048 );
+		$Data = FRead( $this->Socket, 4096 );
 		
 		if( $Data === false )
 		{
