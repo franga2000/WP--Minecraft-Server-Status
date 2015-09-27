@@ -1,4 +1,4 @@
-Wordpress Minecraft Server Status Widget
+Wordpress Minecraft Server Status Widget (V1.3)
 ========================================
 
 Wordpress plugin that adds a widget to display your Minecraft server's status. 
