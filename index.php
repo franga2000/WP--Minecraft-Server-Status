@@ -73,8 +73,13 @@ class MCServerStatus extends WP_Widget {
 				<span id="players-toggle" title="Click to toggle">Players:</span>
 				<ul id="players" <?php if(get_option('MCServerStatus_widget_pl') == "pl-expanded") echo 'style="display:none;"'; ?>>
 					<?php
+					if( ( $Players = $Query->GetPlayers( ) ) == false ){
+					echo "No Players Online!";
+					}
+					else {
 					foreach($Query->GetPlayers() as $key => $player) {
 						echo '<li class="player"><img src="http://cravatar.eu/helmavatar/' . $player . '/' . get_option("MCServerStatus_widget_head-size", "20") . '.png"> ' . $player . '</li>';
+					}
 					}
 					?>
 				</ul>
@@ -109,5 +114,5 @@ function register_MCServerStatus() {
 	register_widget('MCServerStatus');
 }
 
-add_filter ('pre_set_site_transient_update_plugins', 'display_transient_update_plugins');
+//add_filter ('pre_set_site_transient_update_plugins', 'display_transient_update_plugins');
 ?>
