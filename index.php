@@ -86,7 +86,7 @@ class MCServerStatus extends WP_Widget {
 			<div class="widget MCServerStatus">
 				<h3 class="widget-title widget_primary_title"><?php echo get_option('MCServerStatus_widget_title'); ?></h3>
 				<b>IP: </b><?php echo get_option('MCServerStatus_widget_server'); ?><br/>
-				b>Port: </b><?php echo get_option('MCServerStatus_widget_port'); ?><br/>
+				<b>Port: </b><?php echo get_option('MCServerStatus_widget_port'); ?><br/>
 				<img src="/wp-content/plugins/WP-Minecraft-Server-Status-master/img/<?php echo $online ? 'online' : 'offline'; ?>-icon.png"><p style="color:<?php echo $online ? 'green' : 'red'; ?>; display:inline;"><?php echo $online ? 'ONLINE' : 'OFFLINE'; ?></p><br>
 				<span id="players-toggle" title="Click to toggle">Players:</span>
 				<ul id="players" <?php if(get_option('MCServerStatus_widget_pl') == "pl-collapsed") echo 'style="display:none;"'; ?>>
