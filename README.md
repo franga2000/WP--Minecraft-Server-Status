@@ -10,7 +10,8 @@ Open your server's 'server.properties' file and change: 'enable-query=false' to 
 
 ##Credits:
 
-* Most of everything: franga2000 (http://franga2000.com)
+* Improved Wordpress Minecraft Server Status Widget: Flashacker13 (http://flashacker13.com)
+* Original Wordpress Minecraft Server Status Widget: franga2000 (http://franga2000.com)
 * Minecraft Query Script: xPaw (https://github.com/xPaw/PHP-Minecraft-Query)
 
 ##License:
