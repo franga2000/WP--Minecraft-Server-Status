@@ -2,12 +2,29 @@
 /*
 Plugin Name: Minecraft Server Status
 Plugin URI: http://franga2000.com
-Description: Simple minecraft server status widget for your Wordpress website
-Version: 1.1
-Author: franga2000
+Description: A simple Minecraft Server Status widget for your Wordpress website
+Version: 1.3
+Author: franga2000, Flashacker13
 Author URI: http://franga2000.com/
 License: GPLv2 or later.
 */
+
+add_filter('plugin_action_links', 'myplugin_plugin_action_links', 10, 2);
+
+function myplugin_plugin_action_links($links, $file) {
+    static $this_plugin;
+
+    if (!$this_plugin) {
+        $this_plugin = plugin_basename(__FILE__);
+    }
+
+    if ($file == $this_plugin) {
+        $settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/widgets.php">Settings</a>';
+        array_unshift($links, $settings_link);
+    }
+
+    return $links;
+}
 
 class MCServerStatus extends WP_Widget {
 	function __construct() {
@@ -27,7 +44,7 @@ class MCServerStatus extends WP_Widget {
 		<input type="text" class="widefat" name="widgettitle" value="<?php echo stripslashes(get_option('MCServerStatus_widget_title')); ?>" placeholder="Server status" required/>
 		<br/><br/>
 		
-		<label for="server">Server Adress:</label><br/>
+		<label for="server">Server Address:</label><br/>
 		<input type="text" class="widefat" name="server" value="<?php echo stripslashes(get_option('MCServerStatus_widget_server')); ?>" placeholder="mc.server.tld" required/>
 		<br/><br/>
 		
@@ -68,10 +85,11 @@ class MCServerStatus extends WP_Widget {
 		?>
 			<div class="widget MCServerStatus">
 				<h3 class="widget-title widget_primary_title"><?php echo get_option('MCServerStatus_widget_title'); ?></h3>
-				<b>IP:</b><?php echo get_option('MCServerStatus_widget_server'); ?><br/>
-				<img src="/wp-content/plugins/MCServerStatus/img/<?php echo $online ? 'online' : 'offline'; ?>-icon.png"><p style="color:<?php echo $online ? 'green' : 'red'; ?>; display:inline;"><?php echo $online ? 'ONLINE' : 'OFFLINE'; ?></p><br>
+				<b>IP: </b><?php echo get_option('MCServerStatus_widget_server'); ?><br/>
+				<b>Port: </b><?php echo get_option('MCServerStatus_widget_port'); ?><br/>
+				<img src="/wp-content/plugins/WP-Minecraft-Server-Status-master/img/<?php echo $online ? 'online' : 'offline'; ?>-icon.png"><p style="color:<?php echo $online ? 'green' : 'red'; ?>; display:inline;"><?php echo $online ? 'ONLINE' : 'OFFLINE'; ?></p><br>
 				<span id="players-toggle" title="Click to toggle">Players:</span>
-				<ul id="players" <?php if(get_option('MCServerStatus_widget_pl') == "pl-expanded") echo 'style="display:none;"'; ?>>
+				<ul id="players" <?php if(get_option('MCServerStatus_widget_pl') == "pl-collapsed") echo 'style="display:none;"'; ?>>
 					<?php
 					if( ( $Players = $Query->GetPlayers( ) ) == false ){
 					echo "No Players Online!";
