@@ -13,6 +13,8 @@ Open your server's 'server.properties' file and change: 'enable-query=false' to 
 * Wordpress Minecraft Server Status Widget: 
 * - Flashacker13 (http://flashacker13.com)
 * - franga2000 (http://franga2000.com)
+
+**Dependencies:**
 * Minecraft Query Script: xPaw (https://github.com/xPaw/PHP-Minecraft-Query)
 
 ##License:
