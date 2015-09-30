@@ -44,7 +44,7 @@ class MCServerStatus extends WP_Widget {
 		<input type="text" class="widefat" name="widgettitle" value="<?php echo stripslashes(get_option('MCServerStatus_widget_title')); ?>" placeholder="Server status" required/>
 		<br/><br/>
 		
-		<label for="server">Server Adress:</label><br/>
+		<label for="server">Server Address:</label><br/>
 		<input type="text" class="widefat" name="server" value="<?php echo stripslashes(get_option('MCServerStatus_widget_server')); ?>" placeholder="mc.server.tld" required/>
 		<br/><br/>
 		
