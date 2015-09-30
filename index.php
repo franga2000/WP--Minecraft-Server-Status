@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Minecraft Server Status
-Plugin URL: http://franga2000.com
+Plugin URI: http://franga2000.com
 Description: A simple Minecraft Server Status widget for your Wordpress website
 Version: 1.3
-Author: franga2000
+Author: franga2000, Flashacker13
 Author URI: http://franga2000.com/
 License: GPLv2 or later.
 */
