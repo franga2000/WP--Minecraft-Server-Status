@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Pocketmine Server Status
-Plugin URI: http://franga2000.com
+Plugin URI: http://flashacker13.com
 Description: A widget to display information from your pocketmine server onto your Wordpress website.
 Version: 1.0
 Author: Flashacker13, franga2000
