@@ -9,9 +9,9 @@ Author URI: http://franga2000.com/
 License: GPLv2 or later.
 */
 
-add_filter('plugin_action_links', 'myplugin_plugin_action_links', 10, 2);
+add_filter('plugin_action_links', 'MCServerStatus_plugin_action_links', 10, 2);
 
-function myplugin_plugin_action_links($links, $file) {
+function MCServerStatus_plugin_action_links($links, $file) {
     static $this_plugin;
 
     if (!$this_plugin) {
@@ -87,7 +87,18 @@ class MCServerStatus extends WP_Widget {
 				<h3 class="widget-title widget_primary_title"><?php echo get_option('MCServerStatus_widget_title'); ?></h3>
 				<b>IP: </b><?php echo get_option('MCServerStatus_widget_server'); ?><br/>
 				<b>Port: </b><?php echo get_option('MCServerStatus_widget_port'); ?><br/>
-				<img src="/wp-content/plugins/WP-Minecraft-Server-Status-master/img/<?php echo $online ? 'online' : 'offline'; ?>-icon.png"><p style="color:<?php echo $online ? 'green' : 'red'; ?>; display:inline;"><?php echo $online ? 'ONLINE' : 'OFFLINE'; ?></p><br>
+                <?php
+				if ($online){
+                ?>
+                <img src="<?php echo plugins_url('img/online-icon.png', __FILE__);?>"><p style="color:green; display:inline;"><?php echo 'ONLINE'; ?></p><br>
+                <?php
+                }
+                else{
+				?>
+                <img src="<?php echo plugins_url('img/offline-icon.png', __FILE__);?>"><p style="color:red; display:inline;"><?php echo 'OFFLINE'; ?></p><br>
+                <?php
+				}
+                ?>
 				<span id="players-toggle" title="Click to toggle">Players:</span>
 				<ul id="players" <?php if(get_option('MCServerStatus_widget_pl') == "pl-collapsed") echo 'style="display:none;"'; ?>>
 					<?php
