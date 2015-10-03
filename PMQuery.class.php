@@ -1,14 +1,17 @@
 <?php
-class MinecraftQueryException extends Exception
+class PMQueryException extends Exception
 {
-	// Exception thrown by MinecraftQuery class
+	// Exception thrown by PMQuery class
 }
 
-class MinecraftQuery
+class PMQuery
 {
 	/*
 	 * Class written by xPaw
+	 * Modified Classes: Flashacker13
+	 * GitHub: https://github.com/franga2000/WP-Minecraft-Server-Status/tree/pocketmine
 	 *
+	 * Original:
 	 * Website: http://xpaw.me
 	 * GitHub: https://github.com/xPaw/PHP-Minecraft-Query
 	 */
@@ -20,7 +23,7 @@ class MinecraftQuery
 	private $Players;
 	private $Info;
 	
-	public function Connect( $Ip, $Port = 25565, $Timeout = 3 )
+	public function Connect( $Ip, $Port = 19132, $Timeout = 3 )
 	{
 		if( !is_int( $Timeout ) || $Timeout < 0 )
 		{
@@ -31,7 +34,7 @@ class MinecraftQuery
 		
 		if( $ErrNo || $this->Socket === false )
 		{
-			throw new MinecraftQueryException( 'Could not create socket: ' . $ErrStr );
+			throw new PMQueryException( 'Could not create socket: ' . $ErrStr );
 		}
 		
 		Stream_Set_Timeout( $this->Socket, $Timeout );
@@ -44,11 +47,11 @@ class MinecraftQuery
 			$this->GetStatus( $Challenge );
 		}
 		// We catch this because we want to close the socket, not very elegant
-		catch( MinecraftQueryException $e )
+		catch( PMQueryException $e )
 		{
 			FClose( $this->Socket );
 			
-			throw new MinecraftQueryException( $e->getMessage( ) );
+			throw new PMQueryException( $e->getMessage( ) );
 		}
 		
 		FClose( $this->Socket );
@@ -70,7 +73,7 @@ class MinecraftQuery
 		
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( 'Failed to receive challenge.' );
+			throw new PMQueryException( 'Failed to receive challenge.' );
 		}
 		
 		return Pack( 'N', $Data );
@@ -82,7 +85,7 @@ class MinecraftQuery
 		
 		if( !$Data )
 		{
-			throw new MinecraftQueryException( 'Failed to receive status.' );
+			throw new PMQueryException( 'Failed to receive status of your MCPE Server.' );
 		}
 		
 		$Last = '';
@@ -93,7 +96,7 @@ class MinecraftQuery
 		
 		if( Count( $Data ) !== 2 )
 		{
-			throw new MinecraftQueryException( 'Failed to parse server\'s response.' );
+			throw new PMQueryException( 'Failed to parse server\'s response.' );
 		}
 		
 		$Players = SubStr( $Data[ 1 ], 0, -2 );
@@ -171,14 +174,14 @@ class MinecraftQuery
 		
 		if( $Length !== FWrite( $this->Socket, $Command, $Length ) )
 		{
-			throw new MinecraftQueryException( "Failed to write on socket." );
+			throw new PMQueryException( "Failed to write on socket." );
 		}
 		
 		$Data = FRead( $this->Socket, 4096 );
 		
 		if( $Data === false )
 		{
-			throw new MinecraftQueryException( "Failed to read from socket." );
+			throw new PMQueryException( "Failed to read from socket." );
 		}
 		
 		if( StrLen( $Data ) < 5 || $Data[ 0 ] != $Command[ 2 ] )
