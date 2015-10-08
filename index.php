@@ -33,9 +33,9 @@ class PMSS extends WP_Widget {
 	
 	function form() {
 		if (isset($_POST['submitted'])) {
-			update_option('PMSS_widget_title', $_POST['widgettitle']);
-			update_option('PMSS_widget_server', $_POST['server']);
-			update_option('PMSS_widget_port', $_POST['port']);
+			update_option('PMSS_widget_title', $_POST['pmwidgettitle']);
+			update_option('PMSS_widget_server', $_POST['pmserver']);
+			update_option('PMSS_widget_port', $_POST['pmport']);
 			update_option('PMSS_widget_pmpl', $_POST['pmpl']);
 		}
 ?>
